@@ -15,9 +15,6 @@ email_pass = ""
 my_password = ""
 
 
-# program execution starts
-course = input("Enter course code: ")
-
 weeks = {
     "Week 1": datetime.datetime(2022, 1, 16),
     "Week 2": datetime.datetime(2022, 1, 23),
