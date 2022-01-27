@@ -8,7 +8,7 @@ PATH = "/Users/nicklam/Desktop/login/chromedriver"
 driver = webdriver.Chrome(PATH)
 
 
-# variables that are needed within this program
+# variables that are needed within this program, the account is user specific
 today = datetime.datetime.today()
 username = ""
 personal_email = ""
@@ -216,6 +216,7 @@ def main():
         )
         curr_week = findweek()
         getcurrentweek(course, curr_week)
+        driver.maximize_window()
 
     elif course.lower() == "2209":
 
@@ -236,6 +237,7 @@ def main():
         lecture = input("Proceed to lecture? ")
         if lecture.lower() == "yes":
             lectures(course)
+        driver.maximize_window()
 
     elif course.lower() == "2212":
         wb.open(
@@ -250,6 +252,7 @@ def main():
         lecture = input("Proceed to lecture? ")
         if lecture.lower() == "yes":
             lectures(course)
+        driver.maximize_window()
 
     elif course.lower() == "biz":
         wb.open(
@@ -264,6 +267,8 @@ def main():
         wb.open(
             "https://bibliu.com/app/#/view/books/1001281231618/pdf2htmlex/index.html#page_179"
         )
+        driver.maximize_window()
+
     elif course.lower() == "2232":
         wb.open(
             "https://owl.uwo.ca/portal/site/4572e1fe-5c56-4010-a845-3dc2b8e5e96e/tool/a01334f0-7a32-47c1-b881-2bbc97f4487e"
@@ -273,8 +278,9 @@ def main():
         )
         curr_week = findweek()
         getcurrentweek(course, curr_week)
+        driver.maximize_window()
     else:
-        driver.close()
+        driver.quit()
 
 
 main()
