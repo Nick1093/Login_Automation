@@ -1,6 +1,7 @@
 import webbrowser as wb
 import datetime
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 PATH = "/Users/nicklam/Desktop/login/chromedriver"
@@ -14,6 +15,8 @@ personal_email = ""
 email_pass = ""
 my_password = ""
 
+
+course = input("\nEnter course code: ")
 
 weeks = {
     "Week 1": datetime.datetime(2022, 1, 16),
@@ -73,7 +76,6 @@ def findstatsweek(week):
 
 
 def findweek():
-
     for key, value in weeks.items():
         if today <= value:
             return key
@@ -127,7 +129,8 @@ def getcurrentweek(course, week):
         week_content = driver.find_element_by_partial_link_text(week)
         week_content.click()
 
-        video = driver.find_element_by_partial_link_text("Pre-Recorded Video Lectures")
+        video = driver.find_element_by_partial_link_text(
+            "Pre-Recorded Video Lectures")
         return video.click()
 
     elif course.lower() == "2232":
@@ -184,39 +187,23 @@ def getcurrentweek(course, week):
 # function that goes to the specific zoom link of the specified course
 def lectures(course):
     if course == "2212":
-        # open owl enter user name and password
-        driver.get("https://owl.uwo.ca/portal")
-        user = driver.find_element_by_id("eid")
-        user.send_keys(username)
-
-        password = driver.find_element_by_id("pw")
-        password.send_keys(my_password)
-
-        login_button = driver.find_element_by_id("submit")
-        login_button.click()
+        driver.execute_script('window.open("https://owl.uwo.ca/portal");')
+        driver.switch_to.window(driver.window_handles[1])
         # ------------------------------------------------------- #
 
         # go to the course's zoom
         stats = driver.find_element_by_link_text("COMPSCI 2212B 001 FW21")
         stats.click()
         driver.maximize_window()
-        content = driver.find_element_by_xpath(
-            '//*[@id="toolMenu"]/ul/li[16]/a/span[2]'
-        )
+        content = driver.find_element_by_link_text("Zoom")
         content.click()
-        # ------------------------------------------------------- #
-
-        driver.execute_script("window.open('about:blank', 'tab2');")
-        driver.switch_to.window("tab2")
-        driver.get(
-            "https://westernuniversity.zoom.us/j/99748336765?uname=Nicholas+Alexander+Lam#success"
-        )
-        # -------------------------------------------------------------------------------------------------------------- #
+    # ------------------------------------------------------- #
 
     elif course.lower() == "2209":
 
         wb.open("https://westernuniversity.zoom.us/j/2064952056")
-        # ------------------------------------------------------- #
+
+# -------------------------------------------------------------------------------------------------------------- #
 
 
 def main():
