@@ -48,15 +48,29 @@ earthsci_lectures = {
     "Week 11": "Review",
 }
 
-today = datetime.datetime.today()
-username = "nlam57"
-personal_email = "nicholasalexanderlam@gmail.com"
-email_pass = "Focus93!5"
-my_password = "Focus93!2"
+stats_lecs = {
+    "Week 1": "Sampling designs & considerations",
+    "Week 2": "Study designs & considerations",
+    "Week 3": "Planning ahead: Sampling variability",
+    "Week 4": "",
+    "Week 5": "",
+    "Week 6": "",
+    "Week 7": "",
+    "Week 8": "",
+    "Week 9": "",
+    "Week 10": "",
+    "Week 11": "",
+}
 
 
 def findearthsciweek(week):
     for key, value in earthsci_lectures.items():
+        if key == week:
+            return value
+
+
+def findstatsweek(week):
+    for key, value in stats_lecs.items():
         if key == week:
             return value
 
@@ -164,10 +178,10 @@ def getcurrentweek(course, week):
         content.click()
 
         curr = findweek()
-        planet = findearthsciweek(curr)
+        topic = findstatsweek(curr)
 
-        week_content = driver.find_element_by_partial_link_text(planet)
-        return week_content.click()
+        week_topic = driver.find_element_by_link_text(topic)
+        return week_topic.click()
 
 
 # function that goes to the specific zoom link of the specified course
@@ -216,6 +230,8 @@ def main():
         wb.open(
             "https://drive.google.com/drive/folders/1BatojKCgZSv8fwgk19xzcMV_A1gt3MEc"
         )
+        curr_week = findweek()
+        getcurrentweek(course, curr_week)
 
     elif course.lower() == "2209":
 
