@@ -8,7 +8,7 @@ PATH = "/Users/nicklam/Desktop/login/chromedriver"
 driver = webdriver.Chrome(PATH)
 
 
-# variables that are needed within this program, the account is user specific
+# variables that are needed within this program
 today = datetime.datetime.today()
 username = ""
 personal_email = ""
